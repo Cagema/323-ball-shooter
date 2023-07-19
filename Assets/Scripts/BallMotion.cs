@@ -12,10 +12,22 @@ public class BallMotion : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+
         if (transform.position.y < -GameManager.Single.RightUpperCorner.y)
         {
             Destroy(gameObject);
             GameManager.Single.Lives--;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(tag))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            GameManager.Single.Score++;
         }
     }
 }
